@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "449081675071",
+    "project_id": "little-lemon-flutter",
+    "storage_bucket": "little-lemon-flutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449081675071:android:4a6e2f6822fc7292f8578a",
+        "android_client_info": {
+          "package_name": "com.littlelemon.app.little_lemon_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAv44X4z1vst7CImg8VFa2qiJrLUcfdZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

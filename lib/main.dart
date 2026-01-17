@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:little_lemon_flutter/screen/login_screen.dart';
-import 'package:little_lemon_flutter/screen/register_screen.dart';
+import 'package:little_lemon_flutter/core/app_router.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: "Login Screen",
-      home: const RegisterScreen(),
+      theme: ThemeData(primarySwatch: Colors.green),
+      routerConfig: AppRouter.router,
     );
-
   }
 }

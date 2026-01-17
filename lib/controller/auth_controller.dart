@@ -1,18 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../controller/asset_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthController {
   final fullnameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String? errorFullName;
   String? errorEmail;
   String? errorPassword;
   String? errorConfirmPassword;
 
-  void ResetError() {
+  void resetError() {
     errorFullName = null;
     errorEmail = null;
     errorPassword = null;
@@ -20,7 +23,7 @@ class AuthController {
   }
 
   Future<bool> handleLogin(BuildContext context) async {
-    ResetError();
+    resetError();
 
     String email = emailController.text.trim();
     String pass = passwordController.text.trim();
@@ -42,6 +45,23 @@ class AuthController {
       isValid = false;
     }
     if (isValid) {
+      try {
+        await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      } on FirebaseAuthException catch (e) {
+        String errorKey;
+        if (e.code == 'user-not-found' ||
+            e.code == 'wrong-password' ||
+            e.code == 'invalid-credential') {
+          errorKey = await AssetHelper.getMessage('error', 'login_fail');
+
+          AssetHelper.littleLemonToast(context, errorKey);
+          return false;
+        }
+      } catch (e) {
+        AssetHelper.littleLemonToast(context, 'system_error');
+        return false;
+      }
+
       String successMessage = await AssetHelper.getMessage(
         'success',
         'login_success',
@@ -53,7 +73,7 @@ class AuthController {
   }
 
   Future<bool> handleRegister(BuildContext context) async {
-    ResetError();
+    resetError();
 
     String fullname = fullnameController.text.trim();
     String email = emailController.text.trim();
@@ -95,10 +115,35 @@ class AuthController {
       errorConfirmPassword = null;
     }
     if (isValid) {
+      try {
+        UserCredential userCredential = await _auth
+            .createUserWithEmailAndPassword(email: email, password: pass);
+        await FirebaseFirestore.instance
+            .collection('user')
+            .doc(userCredential.user!.uid)
+            .set({
+              'fullname': fullname,
+              'email': email,
+              'role': 'customer',
+              'created_at': FieldValue.serverTimestamp(),
+            });
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'email-already-in-use') {
+          errorEmail = await AssetHelper.getMessage('error', 'email_used');
+        } else {
+          AssetHelper.littleLemonToast(
+            context,
+            await AssetHelper.getMessage('error', 'register_fail'),
+          );
+        }
+        return false;
+      } catch (e) {
+        AssetHelper.littleLemonToast(context, 'Something wrong');
+        return false;
+      }
       String successMessage = await AssetHelper.getMessage(
         'success',
         'register_success',
-
       );
       AssetHelper.littleLemonToast(context, successMessage);
       return true;

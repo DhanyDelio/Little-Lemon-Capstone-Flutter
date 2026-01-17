@@ -1,16 +1,22 @@
 {
-  "error": {
-    "name_empty": "Please input your name",
-    "email_empty": "Please input your email",
-    "email_invalid": "Wrong email format",
-    "pass_empty": "Please input your password",
-    "pass_short": "Password must be at least 6 character",
-    "confirm_empty": "confirm your password",
-    "not_match": "Password not match"
-
-  },
   "success": {
-    "login_success": "Login Success",
-    "register_success": "Register Success"
+    "login_success": "Welcome back! Login successful.",
+    "register_success": "Account created! Welcome to Little Lemon."
+  },
+  "error": {
+    "email_empty": "Email address is required.",
+    "email_invalid": "Please enter a valid email address.",
+    "pass_empty": "Password is required.",
+    "pass_short": "Password must be at least 6 characters.",
+    "user_not_found": "No user found with this email.",
+    "invalid_password": "Incorrect password. Please try again.",
+    "login_fail": "Wrong Email or Password",
+    "name_empty": "Full name is required.",
+    "name_minimum": "Full name must be at least 3 characters.",
+    "confirm_empty": "Please confirm your password.",
+    "not_match": "Passwords do not match.",
+    "email_used": "This email is already registered.",
+    "register_fail": "Registration failed. Please check your data.",
+    "system_error": "System error occurred. Please contact support."
   }
 }

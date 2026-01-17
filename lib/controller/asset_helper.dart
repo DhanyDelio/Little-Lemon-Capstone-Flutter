@@ -22,20 +22,22 @@ class AssetHelper {
         bottom: 50.0,
         left: 20.0,
         right: 20.0,
+        child: Material(
+          color: Colors.transparent,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+            filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
                 vertical: 12.0,
               ),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.15),
+                color: Colors.white.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(20.0),
                 border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.3),
+                  color: Colors.white.withValues(alpha: 0.1),
                   width: 1.0,
                 ),
               ),
@@ -53,7 +55,7 @@ class AssetHelper {
                     child: Text(
                       message,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.black87,
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
                       ),
@@ -64,6 +66,7 @@ class AssetHelper {
             ),
           ),
         ),
+      ),
       ),
     );
     Overlay.of(context).insert(overlayEntry);

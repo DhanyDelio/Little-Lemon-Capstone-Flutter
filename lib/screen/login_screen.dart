@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:little_lemon_flutter/widget/Auth/auth_input.dart';
 import 'package:little_lemon_flutter/widget/Auth/button.dart';
 import 'package:little_lemon_flutter/widget/Auth/greeting.dart';
@@ -27,11 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               const HeaderOnboarding(image: "assets/Logo.png"),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               const Greeting(greetingText: "Let's get to know you"),
               const SizedBox(height: 20),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
+                padding: EdgeInsets.only(right: 185),
                 child: Text(
                   "Personal Information",
                   style: TextStyle(
@@ -41,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
               AuthInput(
                 label: "Email Address",
                 hint: "Email Address",
@@ -70,14 +72,21 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 35),
               Button(
                 textButton: "Login",
-                onPressed: () => _controller.handleLogin(context),
+                onPressed: () async {
+                  bool success = await _controller.handleLogin(context);
+                  setState(() {
+                    if(success){
+                      context.go('/homescreen');
+                    }
+                  });
+                }
               ),
               const SizedBox(height: 22),
               ButtonText(
                 askingtext: "Don't have an account?",
                 text: "Register",
                 button: () {
-                  print("Go to Register");
+                  context.go('/register');
                 },
               ),
             ],

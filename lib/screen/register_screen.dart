@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:little_lemon_flutter/controller/auth_controller.dart';
 import 'package:little_lemon_flutter/utils/app_color.dart';
 import 'package:little_lemon_flutter/widget/Auth/auth_input.dart';
@@ -16,11 +17,12 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final AuthController _controller = AuthController();
   bool isPasswordHidden = true;
+  bool isConfirmPassHidden = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.white,
+      backgroundColor: AppColor.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -76,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               AuthInput(
                 label: "Confirm Password",
                 hint: "Confirm Password",
-                obscure: isPasswordHidden,
+                obscure: isConfirmPassHidden,
                 keyboardType: TextInputType.text,
                 controller: _controller.confirmPasswordController,
                 error: _controller.errorConfirmPassword,
@@ -88,17 +90,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   bool isSuccess = await _controller.handleRegister(context);
                  setState(() {
                     if(isSuccess){
-                      print("Register Success");
+                      context.go('/homescreen');
                     }
                  });
-                  print("Register Successfull");
                 },
               ),
               ButtonText(
                 askingtext: "Already Have Account?",
                 text: "Login",
                 button: () {
-                  print("Go to login screen");
+                 context.go('/login');
                 },
               ),
             ],
