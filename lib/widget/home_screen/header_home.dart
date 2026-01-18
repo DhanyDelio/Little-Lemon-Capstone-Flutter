@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget {
+class HeaderHome extends StatelessWidget {
   final String image;
   final String? text;
   final String? profileImage;
   final VoidCallback? onProfileTap;
 
-  const Header({
+  const HeaderHome({
     super.key,
     required this.image,
     this.text,
@@ -17,23 +17,26 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(image, height: 40),
+          const Expanded(child: SizedBox()),
+          Image.asset(image, height: 50, fit: BoxFit.contain),
 
-              if (profileImage != null)
-                GestureDetector(
-                  onTap: onProfileTap,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(profileImage!),
-                    radius: 20,
-                  ),
-                ),
-            ],
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: onProfileTap,
+                child: profileImage != null
+                    ? CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage(profileImage!),
+                      )
+                    : const Icon(Icons.account_circle, size: 40),
+              ),
+            ),
           ),
         ],
       ),
