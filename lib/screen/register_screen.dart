@@ -5,7 +5,8 @@ import 'package:little_lemon_flutter/utils/app_color.dart';
 import 'package:little_lemon_flutter/widget/Auth/auth_input.dart';
 import 'package:little_lemon_flutter/widget/Auth/button.dart';
 import 'package:little_lemon_flutter/widget/Auth/button_text.dart';
-import 'package:little_lemon_flutter/widget/home_screen/header_home.dart';
+import 'package:little_lemon_flutter/widget/Auth/header_onbording.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -28,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const HeaderHome(image: 'assets/Logo.png'),
+              const HeaderOnboarding(image: 'assets/Logo.png'),
               const SizedBox(height: 50),
               Padding(
                 padding: EdgeInsets.only(right: 190),

@@ -3,13 +3,16 @@ import 'package:little_lemon_flutter/utils/app_color.dart';
 
 class CategorySections extends StatelessWidget {
   final String title;
+  final String selectedCategory;
   final List<String> categories;
   final Function(String) onSelect;
 
+
   const CategorySections({
     super.key,
-    required this.title,
-    required this.categories,
+    this.title = 'ORDER FOR DELIVERY',
+    this.selectedCategory = 'all',
+    this.categories = const ['all', 'Starters', 'Desserts', 'Mains'],
     required this.onSelect,
   });
 
@@ -35,12 +38,16 @@ class CategorySections extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               itemCount: categories.length,
               itemBuilder: (context, index) {
+                final isSelectedCategory =
+                    categories[index] == selectedCategory;
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: OutlinedButton(
                     onPressed: () => onSelect(categories[index]),
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.grey[400],
+                      backgroundColor: isSelectedCategory
+                          ? AppColor.primary
+                          : Colors.grey[400],
                       side: BorderSide.none,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
@@ -49,7 +56,11 @@ class CategorySections extends StatelessWidget {
                     ),
                     child: Text(
                       categories[index],
-                      style: TextStyle(color: AppColor.black),
+                      style: TextStyle(
+                        color: isSelectedCategory
+                            ? AppColor.white
+                            : AppColor.black,
+                      ),
                     ),
                   ),
                 );
