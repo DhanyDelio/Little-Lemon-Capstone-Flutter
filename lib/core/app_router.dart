@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:little_lemon_flutter/screen/home_screen.dart';
+import 'package:little_lemon_flutter/screen/profile_screen.dart';
 import '../screen/login_screen.dart';
 import '../screen/register_screen.dart';
 
@@ -15,6 +16,10 @@ class AppRouter {
       GoRoute(
         path: '/homescreen',
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfileScreen(),
       ),
     ],
   );

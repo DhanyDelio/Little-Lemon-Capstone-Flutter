@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:little_lemon_flutter/utils/app_color.dart';
 import 'package:little_lemon_flutter/widget/home_screen/category_section.dart';
 import 'package:little_lemon_flutter/widget/home_screen/greeting_home_screen.dart';
@@ -41,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     profileImage: "assets/Profile.png",
                     onProfileTap: () {
                       setState(() {
-                        print("context.go('/profile')");
+                        FocusScope.of(context).unfocus();
+                        context.push('/profile');
                       });
                     },
                   ),
